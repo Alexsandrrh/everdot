@@ -1,0 +1,13 @@
+{
+  "name": "Everdot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Alexsandrrh/Everdot.git",
+  "author": "Alexsandrrh <sascha.sadov@yandex.ru>",
+  "license": "Apache License",
+  "private": false,
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "prettier": "^1.18.2"
+  }
+}
