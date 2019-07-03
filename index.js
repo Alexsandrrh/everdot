@@ -1,45 +1,37 @@
 const typeData = require('./lib/typeData');
 const fieldsFilter = require('./lib/fieldsFilter');
 const sizeFilter = require('./lib/sizeFilter');
+const checkQueries = require('./lib/checkQueries');
 
 /**
  * @param {object} req
  * @param {object} res
  * @param {function} next*/
 
-function f(req, res, next) {
+module.exports = (req, res, next) => {
   const { query } = req;
 
   // Set new [key] => [value]
-  req.fields = query.fields.split(',');
-  req.size = query.size;
-  req.expand = query.expand.split(',');
+  req.fields = checkQueries(query.fields, []);
+  req.size = checkQueries(query.size, 20);
+  req.expand = checkQueries(query.expand, []);
 
   // Everdot Function
-  req.everdot = data => {
+  res.everDot = data => {
     switch (typeData(data)) {
-      case 'array':
-        return sizeFilter(req.size, data, req.fields);
       case 'object':
-        return fieldsFilter(req.fields, data);
+        res.json(fieldsFilter(req.fields, data));
+        break;
+      case 'array':
+        res.json(sizeFilter(req.size, data, req, fields));
         break;
       default:
-        throw new Error('Point project data, please!');
+        res.status(500).json({
+          message: 'Everdot : Please, point your data in route',
+          status: 500
+        });
     }
   };
 
-  req.everdot([
-    { id: 1, name: 'Alex', surname: 'Sadov', address: 'Esenina street 1' }
-  ]);
-
-  console.log(req);
   next();
-}
-
-f({
-  query: {
-    fields: 'id,name,surname,address',
-    size: 40,
-    expand: 'address'
-  }
-});
+};

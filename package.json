@@ -4,10 +4,21 @@
   "main": "index.js",
   "repository": "git@github.com:Alexsandrrh/Everdot.git",
   "author": "Alexsandrrh <sascha.sadov@yandex.ru>",
-  "license": "Apache License",
+  "license": "Apache License 2.0",
+  "keywords": [
+    "everdot",
+    "fields",
+    "router",
+    "express"
+  ],
   "private": false,
+  "scripts": {
+    "dev": "nodemon ./test/server.js"
+  },
   "devDependencies": {
     "eslint": "^6.0.1",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   }
 }
