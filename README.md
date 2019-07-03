@@ -1,4 +1,4 @@
-![Everdot](./everdot.svg)
+![Everdot](./everdot.png)
 
 ## Quickstart
 To start using Evernote: 
@@ -11,6 +11,9 @@ const PORT = 3000;
 const Everdot = require('everdot');
 // Init Everdot to Middleware
 app.use(Everdot());
+
+// Init Routes
+app.use('/api', require('./routes/user');
 
 // Start Server
 app.listen(PORT);
@@ -35,6 +38,8 @@ Router.get('/user/:id', async (req, res) => {
         res.send(e).status(500)
     }
 }
+
+module.exports = Router;
 ```
 
 
@@ -45,7 +50,11 @@ Section about url queries-settings
 This query is made to determine which object or object keys you will need for further project development. All the necessary keys should be separated by commas and without spaces.
 ###### Example
 `http://everdot.io/api/user/1/?fields=id,name,surname,address`
+
 #### Size
+The size query will work if you specify an array with data in the data value.
+
+**Default :**  20
 ###### Example
 `http://everdot.io/api/user/all/?size=30`
 
