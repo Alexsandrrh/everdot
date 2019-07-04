@@ -1,6 +1,7 @@
 const typeData = require('./lib/typeData');
-const fieldsFilter = require('./lib/fieldsFilter');
-const sizeFilter = require('./lib/sizeFilter');
+const fieldsFilter = require('./lib/filters/fieldsFilter');
+const sizeFilter = require('./lib/filters/sizeFilter');
+const pageFilter = require('./lib/filters/pageFilter');
 const checkQueries = require('./lib/checkQueries');
 const creatorTreeObject = require('./lib/creatorTreeObject');
 
@@ -15,8 +16,11 @@ module.exports = (req, res, next) => {
 
   // Set new [key] => [value]
   req.fields = checkQueries(query.fields, []);
-  req.size = checkQueries(query.size, 20);
+  req.size = checkQueries(query.size, 'all');
+  req.page = checkQueries(query.page, 'default');
   req.expand = checkQueries(query.expand, []);
+
+  // Tree mode queries
   req.tree = query.tree;
 
   // Everdot Function
@@ -36,7 +40,11 @@ module.exports = (req, res, next) => {
     if (type === 'object') {
       res.json(fieldsFilter(req.fields, data));
     } else if (type === 'array') {
-      res.json(sizeFilter(req.size, data, req.fields));
+      if (req.page === 'default') {
+        res.json(sizeFilter(req.size, data, req.fields));
+      } else {
+        res.json(pageFilter(req, data));
+      }
     } else {
       res.status(500).json({
         message: 'Everdot : Please, point your data in route',

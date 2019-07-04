@@ -10,7 +10,10 @@ app.use(Everdot);
 app.get('/app', (req, res) => {
   axios
     .get(
-      'https://kudago.com/public-api/v1.2/events/?fields=id,title,slug,dates,description,body_text,place,price'
+      'https://kudago.com/public-api/v1.2/events/?' +
+        'fields=id,title,slug,dates,description,tags,categories,participants,location,body_text,place,price' +
+        '&page_size=100' +
+        '&expand=images,place,location,dates,participants'
     )
     .then(response => {
       res.everDot(response.data.results);
