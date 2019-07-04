@@ -12,6 +12,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const Everdot = require('everdot');
+
 // Init Everdot to Middleware
 app.use(Everdot());
 
@@ -58,7 +59,7 @@ In order to quickly view the structure of the requested given you can simply act
 
 Section about url queries-settings
 
-#### Fields
+### Fields
 
 This query is made to determine which object or object keys you will need for further project development. All the necessary keys should be separated by commas and without spaces.
 
@@ -66,7 +67,7 @@ This query is made to determine which object or object keys you will need for fu
 
 `https://everdot.io/api/user/1/?fields=id,name,surname,address`
 
-#### Size
+### Size
 
 The size query will work if you specify an array with data in the data value.
 
@@ -75,7 +76,7 @@ The size query will work if you specify an array with data in the data value.
 ###### Example
 `https://everdot.io/api/user/all/?size=30`
 
-#### Expand
+### Expand
 The parameter is made to extend the data of your object.
 
 ###### Example

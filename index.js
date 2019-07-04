@@ -5,9 +5,10 @@ const checkQueries = require('./lib/checkQueries');
 const creatorTreeObject = require('./lib/creatorTreeObject');
 
 /**
- * @param {object} req
- * @param {object} res
- * @param {function} next*/
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * */
 
 module.exports = (req, res, next) => {
   const { query } = req;
