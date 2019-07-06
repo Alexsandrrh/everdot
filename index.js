@@ -1,11 +1,17 @@
-const typeData = require('./lib/typeData');
-const fieldsFilter = require('./lib/filters/fieldsFilter');
-const sizeFilter = require('./lib/filters/sizeFilter');
-const pageFilter = require('./lib/filters/pageFilter');
-const checkQueries = require('./lib/checkQueries');
-const creatorTreeObject = require('./lib/creatorTreeObject');
+// Common Libs
+const typeData = require('./lib/common/typeData');
+
+// Filters Libs
+const fieldsFilter = require('./lib/filters/fields');
+const sizeFilter = require('./lib/filters/size');
+const pageFilter = require('./lib/filters/page');
+
+// Queries Libs
+const otherQueries = require('./lib/queries/other');
+const fieldsQueries = require('./lib/queries/fields');
 
 /**
+ * @name EverdotMain
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -15,10 +21,13 @@ module.exports = (req, res, next) => {
   const { query } = req;
 
   // Set new [key] => [value]
-  req.fields = checkQueries(query.fields, []);
-  req.size = checkQueries(query.size, 'all');
-  req.page = checkQueries(query.page, 'default');
-  req.expand = checkQueries(query.expand, []);
+  req.fields = otherQueries(query.fields, []);
+
+  console.log(fieldsQueries(query.fields, 'all'));
+
+  req.size = otherQueries(query.size, 'all');
+  req.page = otherQueries(query.page, 'default');
+  req.expand = otherQueries(query.expand, []);
 
   // Tree mode queries
   req.tree = query.tree;
