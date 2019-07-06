@@ -76,6 +76,12 @@ The size query will work if you specify an array with data in the data value.
 ###### Example
 `https://everdot.io/api/user/all/?size=30`
 
+
+### Page
+
+###### Example
+`https://everdot.io/api/user/all/?page=2`
+
 ### Expand
 The parameter is made to extend the data of your object.
 
