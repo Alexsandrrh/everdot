@@ -49,13 +49,16 @@ module.exports = Router;
 
 ## Options
 
-#### pageSize
+### pageSize
 **Default :** 20
 
-#### keyNotValue
+### debug
+**Default :** false
+
+### keyNotValue
 **Default :** null
 
-#### treeMode
+### treeMode
 **Default :** false
 
 ## Tree Mode
@@ -64,7 +67,9 @@ In order to quickly view the structure of the requested given you can simply act
 
 ###### Example
 
-`https://everdot.io/user/all/?tree=true`
+```
+https://everdot.io/user/all/?tree=true
+```
 
 ## Queries
 
@@ -76,24 +81,33 @@ This query is made to determine which object or object keys you will need for fu
 
 ###### Example
 
-`https://everdot.io/api/user/1/?fields=id,name,surname,address`
+```
+https://everdot.io/api/user/1/?fields=id,name,surname,address
+```
 
 ### Size
-
 The size query will work if you specify an array with data in the data value.
 
 **Default :** 20
 
 ###### Example
-`https://everdot.io/api/user/all/?size=30`
+```
+https://everdot.io/api/user/all/?size=30
+```
 
 ### Page
+This value allows you to access the data more easily. That is, all your data will be divided into pages based on the parameters you set. This rule will take effect after you enter **query page** into the address bar.
 
 ###### Example
-`https://everdot.io/api/user/all/?page=2`
+```
+// Works
+https://everdot.io/api/user/all/?page=2
+```
 
 ### Expand
 The parameter is made to extend the data of your object.
 
 ###### Example
-`https://everdot.io/api/user/1/?expand=address`
+```
+https://everdot.io/api/user/1/?expand=address
+```
