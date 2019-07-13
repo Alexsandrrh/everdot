@@ -47,7 +47,7 @@ Router.get('/user/:id', async (req, res) => {
 module.exports = Router;
 ```
 
-## Options
+## Options:
 
 ### pageSize
 **Default :** 20
@@ -73,7 +73,10 @@ https://everdot.io/user/all/?tree=true
 
 ## Queries
 
-Section about url queries-settings
+Section about url queries-settings.
+
+**P.S**
+All listed queries will be available and decoded in request.
 
 ### Fields
 
@@ -82,7 +85,17 @@ This query is made to determine which object or object keys you will need for fu
 ###### Example
 
 ```
-https://everdot.io/api/user/1/?fields=id,name,surname,address
+https://everdot.io/api/user/1/?fields=id,name,surname,address,email,age
+
+// On Response
+    {
+        "id": 1,
+        "name": "John",
+        "surname": "Smith",
+        "address": "Wall Street, New York, NY 10005",
+        "email: "johnsmith@mail.com",
+        "age": 28
+    }
 ```
 
 ### Size
@@ -93,6 +106,8 @@ The size query will work if you specify an array with data in the data value.
 ###### Example
 ```
 https://everdot.io/api/user/all/?size=30
+
+// On Response Array[30]
 ```
 
 ### Page
@@ -102,6 +117,13 @@ This value allows you to access the data more easily. That is, all your data wil
 ```
 // Works
 https://everdot.io/api/user/all/?page=2
+
+// On Response
+ {
+    "next": "URL NEXT PAGE WITH DATA",
+    "prev": "URL PREV PAGE WITH DATA",
+    "results": Array[pageSize]
+ }
 ```
 
 ### Expand
@@ -109,5 +131,11 @@ The parameter is made to extend the data of your object.
 
 ###### Example
 ```
-https://everdot.io/api/user/1/?expand=address
+// Url address
+https://everdot.io/api/user/1/?expand=address,price
+
+// On Route 
+Router.get('/event', (req, res) => {
+    res.send(req.expand) // On Response ['address', 'price']
+})
 ```
