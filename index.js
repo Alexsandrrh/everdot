@@ -45,7 +45,7 @@ function Everdot(options) {
 
     req.size = otherQueries(query.size, this.pageSize);
     req.page = otherQueries(query.page, 'default');
-    req.expand = otherQueries(query.expand, []);
+    req.expands = otherQueries(query.expands, []);
     req.domain = getDomain(req);
     req.tree = Boolean(query.tree) || false || this.modeTree;
 
