@@ -1,5 +1,6 @@
 // Common Libs
 const typeData = require('./lib/common/typeData');
+const getDomain = require('./lib/common/getDomain');
 
 // Filters Libs
 const fieldsFilter = require('./lib/filters/fields');
@@ -8,59 +9,81 @@ const pageFilter = require('./lib/filters/page');
 
 // Queries Libs
 const otherQueries = require('./lib/queries/other');
-const fieldsQueries = require('./lib/queries/fields');
+
+// Tree Mode
+const TreeGenerate = require('./lib/tree');
+
+// Create Main function
 
 /**
- * @name EverdotMain
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
+ * @name Everdot
+ * @param {Object} options
+ * @return {Function}
  * */
 
-module.exports = (req, res, next) => {
-  const { query } = req;
+function Everdot(options) {
+  // Options
+  this.pageSize = options.pageSize || 20;
+  this.debug = options.debug || false;
 
-  // Set new [key] => [value]
-  req.fields = otherQueries(query.fields, []);
+  /**
+   * @name Middleware Function
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Function} next
+   * */
+  return (req, res, next) => {
+    const { query } = req;
 
-  console.log(fieldsQueries(query.fields, 'all'));
+    // Set new [key] => [value]
+    req.fields = otherQueries(query.fields, []);
+    req.size = otherQueries(query.size, this.pageSize);
+    req.page = otherQueries(query.page, 'default');
+    req.expand = otherQueries(query.expand, []);
+    req.domain = getDomain(req);
+    req.tree = Boolean(query.tree) || false;
 
-  req.size = otherQueries(query.size, 'all');
-  req.page = otherQueries(query.page, 'default');
-  req.expand = otherQueries(query.expand, []);
+    // Everdot Function
+    res.everDot = data => {
+      const type = typeData(data);
 
-  // Tree mode queries
-  req.tree = query.tree;
-
-  // Everdot Function
-  res.everDot = (data, filter = true) => {
-    let type = typeData(data);
-
-    // TREE MODE
-    if (req.tree === 'true') {
-      if (type === 'object') {
-        res.json(creatorTreeObject(data));
-      } else if (type === 'array') {
-        res.json(creatorTreeObject(data[0]));
+      // TREE MODE
+      if (req.tree) {
+        if (type === 'object') {
+          // Entry object
+          res.json(TreeGenerate(data));
+        } else if (type === 'array') {
+          // Entry random object
+          res.json(TreeGenerate(data[0]));
+        }
       }
-    }
 
-    // Static queries
-    if (type === 'object') {
-      res.json(fieldsFilter(req.fields, data));
-    } else if (type === 'array') {
-      if (req.page === 'default') {
-        res.json(sizeFilter(req.size, data, req.fields));
-      } else {
-        res.json(pageFilter(req, data));
+      // Static queries
+      switch (type) {
+        case 'object':
+          // Working Query Fields
+          res.json(fieldsFilter(req.fields, data));
+          break;
+        case 'array':
+          if (req.page === 'default') {
+            // Working Queries Size, Fields
+            res.json(sizeFilter(req.size, data, req.fields));
+          } else {
+            // Working Queries Page, Size, Fields
+            res.json(pageFilter(req, data));
+          }
+          break;
+        default:
+          // Error
+          res.status(500).json({
+            message: 'Everdot : Please, point your data in route',
+            status: 500
+          });
       }
-    } else {
-      res.status(500).json({
-        message: 'Everdot : Please, point your data in route',
-        status: 500
-      });
-    }
+    };
+
+    next();
   };
+}
 
-  next();
-};
+module.exports = Everdot;

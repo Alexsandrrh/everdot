@@ -5,7 +5,7 @@ const Everdot = require('../index');
 const axios = require('axios');
 
 // Init Everdot to Middleware
-app.use(Everdot);
+app.use(Everdot({ pageSize: 20, debug: true }));
 
 app.get('/app', (req, res) => {
   axios
