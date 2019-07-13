@@ -50,7 +50,7 @@ function Everdot(options) {
     req.tree = Boolean(query.tree) || false || this.modeTree;
 
     // Everdot Function
-    res.everDot = data => {
+    res.sendEverdot = data => {
       const type = typeData(data);
 
       // TREE MODE

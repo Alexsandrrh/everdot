@@ -1,5 +1,7 @@
 ![Everdot](./everdot.png)
 
+**Queries manager for your response data**
+
 ## Quickstart
 
 To start using Everdot:
@@ -33,11 +35,12 @@ const User = require('../models/User');
 
 Router.get('/user/:id', async (req, res) => {
     try {
-
+    
+    // Get some beautifully
     let user = await User.findById(req,params.id);
 
     // This method response with filter
-    res.everDot(user)
+    res.sendEverdot(user)
 
     } catch(e) {
         res.send(e).status(500)
@@ -82,6 +85,7 @@ In order to quickly view the structure of the requested given you can simply act
         "age": 28
     }
 
+// Activate treeMode = true
 https://everdot.io/user/all/?tree=true
 
 // On Response
@@ -109,6 +113,7 @@ This query is made to determine which object or object keys you will need for fu
 ###### Example
 
 ```
+// Url address
 https://everdot.io/api/user/1/?fields=id,name,surname,address,email,age
 
 // On Response
@@ -131,6 +136,7 @@ The size query will work if you specify an array with data in the data value.
 ###### Example
 
 ```
+// Url address
 https://everdot.io/api/user/all/?size=30
 
 // On Response Array[30]
@@ -143,6 +149,7 @@ This value allows you to access the data more easily. That is, all your data wil
 ###### Example
 
 ```
+// Url address
 // Works
 https://everdot.io/api/user/all/?page=2
 
@@ -150,6 +157,8 @@ https://everdot.io/api/user/all/?page=2
  {
     "next": "URL NEXT PAGE WITH DATA",
     "prev": "URL PREV PAGE WITH DATA",
+    "countItems: pageSize,
+    "dateRequest": "DATE NOW",
     "results": Array[pageSize]
  }
 ```
