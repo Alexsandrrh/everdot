@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "git@github.com:Alexsandrrh/Everdot.git",
   "author": "Alexsandrrh <sascha.sadov@yandex.ru>",
-  "description": "",
+  "description": "Queries manager for your response data",
   "keywords": [
     "everdot",
     "schema",

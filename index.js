@@ -9,6 +9,7 @@ const pageFilter = require('./lib/filters/page');
 
 // Queries Libs
 const otherQueries = require('./lib/queries/other');
+const fieldsQueries = require('./lib/queries/fields');
 
 // Tree Mode
 const TreeGenerate = require('./lib/tree');
@@ -24,7 +25,7 @@ const TreeGenerate = require('./lib/tree');
 function Everdot(options) {
   // Options
   this.pageSize = options.pageSize || 20;
-  this.keyNotData = options.keyNotData;
+  this.keyNotValue = options.keyNotValue;
   this.debug = options.debug || false;
   this.modeTree = options.modeTree || false;
 
@@ -39,6 +40,9 @@ function Everdot(options) {
 
     // Set new [key] => [value]
     req.fields = otherQueries(query.fields, []);
+
+    fieldsQueries(query.fields);
+
     req.size = otherQueries(query.size, this.pageSize);
     req.page = otherQueries(query.page, 'default');
     req.expand = otherQueries(query.expand, []);

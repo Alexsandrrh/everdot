@@ -14,7 +14,7 @@ const PORT = 3000;
 const Everdot = require('everdot');
 
 // Init Everdot to Middleware
-app.use(Everdot());
+app.use(Everdot('YOUR OPTIONS'));
 
 // Init Routes
 app.use('/api', require('./routes/user');
@@ -47,6 +47,17 @@ Router.get('/user/:id', async (req, res) => {
 module.exports = Router;
 ```
 
+## Options
+
+#### pageSize
+**Default :** 20
+
+#### keyNotValue
+**Default :** null
+
+#### treeMode
+**Default :** false
+
 ## Tree Mode
 
 In order to quickly view the structure of the requested given you can simply activate **Tree Mode**. No matter what type of data you give **Everdot** itself will understand that you gave it (object | array)
@@ -75,7 +86,6 @@ The size query will work if you specify an array with data in the data value.
 
 ###### Example
 `https://everdot.io/api/user/all/?size=30`
-
 
 ### Page
 
