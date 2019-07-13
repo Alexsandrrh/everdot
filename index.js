@@ -24,7 +24,9 @@ const TreeGenerate = require('./lib/tree');
 function Everdot(options) {
   // Options
   this.pageSize = options.pageSize || 20;
+  this.keyNotData = options.keyNotData;
   this.debug = options.debug || false;
+  this.modeTree = options.modeTree || false;
 
   /**
    * @name Middleware Function
@@ -41,7 +43,7 @@ function Everdot(options) {
     req.page = otherQueries(query.page, 'default');
     req.expand = otherQueries(query.expand, []);
     req.domain = getDomain(req);
-    req.tree = Boolean(query.tree) || false;
+    req.tree = Boolean(query.tree) || false || this.modeTree;
 
     // Everdot Function
     res.everDot = data => {

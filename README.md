@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-To start using Evernote:
+To start using Everdot:
 
 1. Install the package in your project. `yarn add everdot` or `npm install everdot`
 2. Make the import where you initialize the middleware development.
