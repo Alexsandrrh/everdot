@@ -178,3 +178,49 @@ Router.get('/event', (req, res) => {
     res.send(req.expands) // On Response ['address', 'price']
 })
 ```
+
+### Find
+
+The parameter is made to extend the data of your object.
+
+###### Example
+
+```
+// Url address
+https://everdot.io/api/user/all/?find=(id:55)
+
+
+// On Response
+    [
+        { 
+            "id": 3,
+            "displayName: "John78"
+        },
+        {
+           "id": 8,
+           "displayName: "JohnSmith" 
+        }
+    ]
+
+### FindStream
+
+The parameter is made to extend the data of your object.
+
+###### Example
+
+```
+// Url address
+https://everdot.io/api/user/all/?findStream=(displayName:Jo)
+
+// On Response
+    [
+        { 
+            "id": 3,
+            "displayName: "John78"
+        },
+        {
+           "id": 8,
+           "displayName: "JohnSmith" 
+        }
+    ]
+```

@@ -3,6 +3,9 @@ const fieldsFilter = require('../lib/filters/fields');
 const sizeFilter = require('../lib/filters/size');
 const pageFilter = require('../lib/filters/page');
 
+// Response
+const response = require('../lib/schemes/response');
+
 /**
  * @name Queries
  * @param {Object} req
@@ -16,12 +19,12 @@ function Queries(req, res, type, data) {
   switch (type) {
     case 'object':
       // Working Query Fields
-      res.json(fieldsFilter(req.fields, data));
+      res.json(response(200, fieldsFilter(req.fields, data)));
       break;
     case 'array':
       if (req.page === 'default') {
         // Working Queries Size, Fields
-        res.json(sizeFilter(req.size, data, req.fields));
+        res.json(response(200, sizeFilter(req.size, data, req.fields)));
       } else {
         // Working Queries Page, Size, Fields
         res.json(pageFilter(req, data));

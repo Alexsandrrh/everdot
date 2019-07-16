@@ -26,7 +26,7 @@ function Find(req, res, type, data) {
           .end();
       });
   } else if (req.findStream !== 'none') {
-    const { key, value } = req.findStream;
+    const { key, value } = req.findStream[0];
     findStreamFilter(key, value, data)
       .then(response => {
         Queries(req, res, type, response);
