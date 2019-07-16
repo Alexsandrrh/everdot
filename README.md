@@ -181,7 +181,7 @@ Router.get('/event', (req, res) => {
 
 ### Find
 
-The parameter is made to extend the data of your object.
+This parameter will help to find information on different criteria (Keys)
 
 ###### Example
 
@@ -193,18 +193,15 @@ https://everdot.io/api/user/all/?find=(id:55)
 // On Response
     [
         { 
-            "id": 3,
-            "displayName: "John78"
-        },
-        {
-           "id": 8,
-           "displayName: "JohnSmith" 
+            "id": 55,
+            "displayName: "JohnSmith"
         }
     ]
+```
 
 ### FindStream
 
-The parameter is made to extend the data of your object.
+The main difference from the usual **Find** is finding information by letters entered in the value to key field
 
 ###### Example
 
