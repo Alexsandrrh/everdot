@@ -20,6 +20,7 @@
   ],
   "private": false,
   "scripts": {
+    "lint": "eslint .",
     "dev": "nodemon ./test/server.js",
     "doc": "jsdoc lib\\typeData.js lib\\checkQueries.js lib\\fieldsFilter.js lib\\creatorTreeObject.js lib\\sizeFilter.js ./README.md"
   },

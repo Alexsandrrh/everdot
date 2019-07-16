@@ -40,7 +40,7 @@ Router.get('/user/:id', async (req, res) => {
     let user = await User.findById(req,params.id);
 
     // This method response with filter
-    res.sendEverdot(user)
+    res.sendByEverdot(user)
 
     } catch(e) {
         res.send(e).status(500)
