@@ -1,6 +1,6 @@
 // Filters Libs
+const filter = require('../lib/filters/filter');
 const findFilter = require('../lib/filters/find');
-const findStreamFilter = require('../lib/filters/findStream');
 
 // Other modules
 const Queries = require('./queries');
@@ -14,8 +14,8 @@ const Queries = require('./queries');
  * */
 
 function Find(req, res, type, data) {
-  if (req.find !== 'none') {
-    findFilter(req.find, data)
+  if (req.filter !== 'none') {
+    filter(req.filter, data)
       .then(response => {
         Queries(req, res, type, response);
       })
@@ -25,9 +25,9 @@ function Find(req, res, type, data) {
           .send(err)
           .end();
       });
-  } else if (req.findStream !== 'none') {
-    const { key, value } = req.findStream[0];
-    findStreamFilter(key, value, data)
+  } else if (req.find !== 'none') {
+    const { key, value } = req.find[0];
+    findFilter(key, value, data)
       .then(response => {
         Queries(req, res, type, response);
       })

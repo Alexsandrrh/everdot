@@ -34,5 +34,8 @@
     "express": "^4.17.1",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.14"
   }
 }

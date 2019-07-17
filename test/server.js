@@ -6,7 +6,12 @@ const data = require('./data');
 
 // Init Everdot to Middleware
 app.use(
-  Everdot({ pageSize: 25, pageModeAuto: true, debug: true, keyNotValue: null })
+  Everdot({
+    pageSize: 'all',
+    pageModeAuto: true,
+    debug: true,
+    keyNotValue: null
+  })
 );
 
 app.get('/app', (req, res) => {

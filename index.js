@@ -41,9 +41,9 @@ function Everdot(options) {
     // For module tree
     req.tree = Boolean(query.tree) || false || this.modeTree;
 
-    // For module find
+    // For module find & filter
+    req.filter = findQueries(query.filter, 'none');
     req.find = findQueries(query.find, 'none');
-    req.findStream = findQueries(query.findStream, 'none');
 
     /**
      * @name SendByEverdot

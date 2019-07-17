@@ -179,7 +179,7 @@ Router.get('/event', (req, res) => {
 })
 ```
 
-### Find
+### Filter
 
 This parameter will help to find information on different criteria (Keys)
 
@@ -187,21 +187,27 @@ This parameter will help to find information on different criteria (Keys)
 
 ```
 // Url address
-https://everdot.io/api/user/all/?find=(id:55)
+https://everdot.io/api/user/all/?filter=(isBlocked:false)
 
 
 // On Response
     [
         { 
             "id": 55,
-            "displayName: "JohnSmith"
+            "displayName: "JohnSmith",
+            "isBlocked": false
+        },
+        { 
+            "id": 78,
+            "displayName: "JR",
+            "isBlocked": false
         }
     ]
 ```
 
-### FindStream
+### Find
 
-The main difference from the usual **Find** is finding information by letters entered in the value to key field
+The main difference from the usual **Filter** is finding information by letters entered in the value to key field
 
 ###### Example
 
