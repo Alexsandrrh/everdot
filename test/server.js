@@ -14,9 +14,16 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  console.log('Request  :  ' + req.requestUrl);
+  next();
+});
+
 app.get('/app', (req, res) => {
   res.sendByEverdot(data);
 });
 
 // Start Server
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log('Testing running ...');
+});

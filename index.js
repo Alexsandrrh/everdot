@@ -16,9 +16,12 @@ const core = require('./core');
 
 function Everdot(options) {
   // Options
-  this.pageSize = options.pageSize || 20;
+  // Page options
+  this.pageModeAuto = options.pageModeAuto || true; // page mode on:off
+  this.pageSize = options.pageSize || 25; // page size array
+
+  // Other
   this.keyNotValue = options.keyNotValue;
-  this.debug = options.debug || false;
   this.modeTree = options.modeTree || false;
 
   /**
@@ -44,6 +47,10 @@ function Everdot(options) {
     // For module find & filter
     req.filter = findQueries(query.filter, 'none');
     req.find = findQueries(query.find, 'none');
+
+    // Road
+    req.domain = req.protocol + '://' + req.get('host');
+    req.requestUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
 
     /**
      * @name SendByEverdot
